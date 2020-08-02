@@ -1,11 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(bodyParser.json());
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -15,6 +14,10 @@ mongoose.connect(
     console.error(err);
   }
 );
+
+app.get('/', (req, res) => {
+  res.send(req.body.test);
+});
 
 app.listen(3000, () => {
   console.log('simple-blog is listening on port 3000!');
