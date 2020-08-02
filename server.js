@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const Article = require('./models/Article');
 require('dotenv').config();
 const app = express();
 
@@ -16,7 +17,20 @@ mongoose.connect(
 );
 
 app.get('/', (req, res) => {
-  res.send(req.body.test);
+  res.send('Hello World!');
+});
+
+app.post('/article', async (req, res) => {
+  const article = new Article({
+    title: req.body.title,
+    body: req.body.body,
+    author: req.body.author,
+  });
+
+  await article.save((err, article) => {
+    if (!err) return res.json(article);
+    res.status(500).json({ err: err });
+  });
 });
 
 app.listen(3000, () => {
