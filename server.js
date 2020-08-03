@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Article = require('./models/Article');
+const article = require('./routes/api/article');
 require('dotenv').config();
 const app = express();
 
 app.use(bodyParser.json());
+app.use('/article', article);
 
 mongoose.connect(
   process.env.MONGO_URI,
