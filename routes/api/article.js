@@ -3,7 +3,10 @@ const Article = require('../../models/Article');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Article route');
+  const articles = Article.find({}, (err, articles) => {
+    if (!err) return res.json(articles);
+    res.status(500).json({ err: err });
+  });
 });
 
 router.post('/', async (req, res) => {
