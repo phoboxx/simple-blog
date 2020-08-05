@@ -10,9 +10,9 @@ class Article {
     const seperationElement = document.createElement('hr');
     titleElement.innerHTML = this.title;
     bodyElement.innerHTML = this.body;
-    document.body.appendChild(titleElement);
-    document.body.appendChild(bodyElement);
-    document.body.appendChild(seperationElement);
+    document.getElementById('Articles').appendChild(titleElement);
+    document.getElementById('Articles').appendChild(bodyElement);
+    document.getElementById('Articles').appendChild(seperationElement);
   }
 }
 const fetchArticles = async () => {
