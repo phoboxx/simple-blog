@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./createArticle.js"></script>
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -18,5 +24,31 @@
       ></textarea>
       <input type="submit" />
     </form>
+    <!-- Initializing QuillJS -->
+    <div id="editor">
+      <h1>test</h1>
+    </div>
+
+    <div id="result"></div>
+    <input type="button" onClick="displayHTML()" value="Display" />
+
+    <script>
+      var quill = new Quill('#editor', {
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, false] }],
+            ['bold', 'italic', 'underline'],
+            ['image', 'code-block'],
+          ],
+        },
+        placeholder: 'Compose an epic...',
+        theme: 'snow',
+      });
+      console.log(quill.getContents());
+      console.log(quill.root.innerHTML);
+      function displayHTML() {
+        document.getElementById('result').innerHTML = quill.root.innerHTML;
+      }
+    </script>
   </body>
 </html>
