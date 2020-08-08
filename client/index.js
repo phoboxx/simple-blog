@@ -26,4 +26,15 @@ const fetchArticles = async () => {
   }
 };
 
-fetchArticles();
+const fetchArticle = async () => {
+  const queryString = window.location.search;
+  var params = new URLSearchParams(queryString);
+  let id = params.get('id');
+
+  let response = await fetch(`http://127.0.0.1:3000/api/article/${id}`);
+  if (response.ok) {
+    let json = await response.json();
+    const article = new Article(json.title, json.body);
+    article.displayArticle();
+  }
+};

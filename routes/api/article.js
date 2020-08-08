@@ -12,6 +12,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Desc: GET specific article
+router.get('/:id', async (req, res) => {
+  // check if it's a valid ID
+  const checkIfValidId = new RegExp('^[0-9a-fA-F]{24}$');
+  if (!checkIfValidId.test(req.params.id))
+    return res.status(400).json({ err: 'Not a valid id' });
+
+  try {
+    const article = await Article.findById(req.params.id);
+    if (article === null)
+      return res.status(400).json({ err: "Article dosen't exist" });
+    return res.json(article);
+  } catch (err) {
+    if (err) return res.json({ err: err });
+  }
+});
+
 // Desc: POST an article
 router.post('/', async (req, res) => {
   const article = new Article({
