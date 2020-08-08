@@ -1,6 +1,6 @@
 const submitArticle = () => {
   const title = document.getElementById('title').value;
-  const body = document.getElementById('body').value;
+  const body = quill.root.innerHTML;
 
   const form = {
     title: title,

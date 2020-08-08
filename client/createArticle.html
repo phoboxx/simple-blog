@@ -15,40 +15,28 @@
   <body>
     <form action="JavaScript:submitArticle()" id="articleForm">
       <input type="text" name="title" id="title" placeholder="Title" />
-      <textarea
-        name="body"
-        id="body"
-        cols="30"
-        rows="10"
-        placeholder="Article text"
-      ></textarea>
+      <div id="editor">
+        <h1>test</h1>
+      </div>
+      <script>
+        var quill = new Quill('#editor', {
+          modules: {
+            toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block'],
+            ],
+          },
+          placeholder: 'Compose an epic...',
+          theme: 'snow',
+        });
+        console.log(quill.getContents());
+        console.log(quill.root.innerHTML);
+        function displayHTML() {
+          document.getElementById('result').innerHTML = quill.root.innerHTML;
+        }
+      </script>
       <input type="submit" />
     </form>
-    <!-- Initializing QuillJS -->
-    <div id="editor">
-      <h1>test</h1>
-    </div>
-
-    <div id="result"></div>
-    <input type="button" onClick="displayHTML()" value="Display" />
-
-    <script>
-      var quill = new Quill('#editor', {
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, false] }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block'],
-          ],
-        },
-        placeholder: 'Compose an epic...',
-        theme: 'snow',
-      });
-      console.log(quill.getContents());
-      console.log(quill.root.innerHTML);
-      function displayHTML() {
-        document.getElementById('result').innerHTML = quill.root.innerHTML;
-      }
-    </script>
   </body>
 </html>

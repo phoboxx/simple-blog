@@ -5,7 +5,7 @@ class Article {
   }
 
   displayArticle() {
-    const titleElement = document.createElement('h1');
+    const titleElement = document.createElement('h2');
     const bodyElement = document.createElement('p');
     const seperationElement = document.createElement('hr');
     titleElement.innerHTML = this.title;
